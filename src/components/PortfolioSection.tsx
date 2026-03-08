@@ -1,25 +1,60 @@
-import { motion, type Easing } from "framer-motion";
+import { motion, useScroll, useTransform, type Easing } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import BlurTypeText from "@/components/BlurTypeText";
+import { useRef } from "react";
 
 const projects = [
-  { title: "NeurospicyKidz", tags: ["Toy", "Shopify Store"], img: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600&h=400&fit=crop", span: "" },
-  { title: "Esabao", tags: ["Dropshipping", "Shopify Store"], img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop", span: "" },
-  { title: "Noeva Boutique", tags: ["Fashion", "Shopify Store"], img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop", span: "" },
-  { title: "Health Care Store", tags: ["Health Care", "Shopify Store"], img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop", span: "" },
-  { title: "One Product Store", tags: ["One Product", "Shopify Store"], img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=400&fit=crop", span: "" },
-  { title: "DecalGraphixx", tags: ["Sticker", "Shopify Store"], img: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&h=400&fit=crop", span: "" },
+  { title: "NeurospicyKidz", tags: ["Toy", "Shopify Store"], img: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600&h=400&fit=crop" },
+  { title: "Esabao", tags: ["Dropshipping", "Shopify Store"], img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop" },
+  { title: "Noeva Boutique", tags: ["Fashion", "Shopify Store"], img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop" },
+  { title: "Health Care Store", tags: ["Health Care", "Shopify Store"], img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop" },
+  { title: "One Product Store", tags: ["One Product", "Shopify Store"], img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=400&fit=crop" },
+  { title: "DecalGraphixx", tags: ["Sticker", "Shopify Store"], img: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&h=400&fit=crop" },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
+const alternateSlide = {
+  hidden: { opacity: 0 },
   visible: (i: number) => ({
     opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, delay: 0.08 + i * 0.12, ease: "easeOut" as Easing },
+    x: 0,
+    transition: { duration: 0.7, delay: 0.1 + i * 0.12, ease: "easeOut" as Easing },
   }),
 };
+
+function ParallaxImage({ src, alt }: { src: string; alt: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], [-20, 20]);
+
+  return (
+    <div ref={ref} className="overflow-hidden relative">
+      <motion.img
+        src={src}
+        alt={alt}
+        className="w-full h-56 object-cover"
+        loading="lazy"
+        style={{ y }}
+        whileHover={{ scale: 1.08 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      />
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileHover={{ opacity: 1 }}
+        className="absolute inset-0 bg-primary/40 flex items-center justify-center"
+      >
+        <motion.div
+          className="w-12 h-12 rounded-full bg-background flex items-center justify-center"
+          initial={{ scale: 1 }}
+          whileHover={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 0.4 }}
+        >
+          <ArrowUpRight className="w-5 h-5 text-foreground" />
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+}
 
 export default function PortfolioSection() {
   const { ref, isVisible } = useScrollAnimation();
@@ -55,31 +90,12 @@ export default function PortfolioSection() {
             <motion.div
               key={p.title}
               custom={i}
-              initial="hidden"
-              animate={isVisible ? "visible" : "hidden"}
-              variants={fadeUp}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -60 : 60 }}
+              animate={isVisible ? alternateSlide.visible(i) : {}}
               whileHover={{ y: -6 }}
-              className={`group rounded-2xl overflow-hidden border border-border bg-card cursor-pointer ${p.span}`}
+              className="group rounded-2xl overflow-hidden border border-border bg-card cursor-pointer"
             >
-              <div className="overflow-hidden relative">
-                <motion.img
-                  src={p.img}
-                  alt={p.title}
-                  className="w-full h-56 object-cover"
-                  loading="lazy"
-                  whileHover={{ scale: 1.08 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                />
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  className="absolute inset-0 bg-primary/40 flex items-center justify-center"
-                >
-                  <div className="w-12 h-12 rounded-full bg-background flex items-center justify-center">
-                    <ArrowUpRight className="w-5 h-5 text-foreground" />
-                  </div>
-                </motion.div>
-              </div>
+              <ParallaxImage src={p.img} alt={p.title} />
               <div className="p-5">
                 <h3 className="text-lg font-semibold text-foreground">{p.title}</h3>
                 <div className="flex gap-2 mt-2 flex-wrap">
