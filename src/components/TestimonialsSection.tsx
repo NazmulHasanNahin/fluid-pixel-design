@@ -1,0 +1,85 @@
+import { motion } from "framer-motion";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { Star, Quote } from "lucide-react";
+
+export default function TestimonialsSection() {
+  const { ref, isVisible } = useScrollAnimation();
+
+  return (
+    <section ref={ref} className="py-24 px-6 bg-muted/30">
+      <div className="max-w-6xl mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="text-3xl md:text-5xl font-bold text-center text-foreground"
+        >
+          What clients are saying{" "}
+          <span className="font-serif-display italic font-normal">about us</span>
+        </motion.h2>
+
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto">
+          {/* Large testimonial */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="md:col-span-2 md:row-span-2 rounded-2xl bg-primary text-primary-foreground p-8 md:p-12 flex flex-col justify-between relative overflow-hidden min-h-[320px]"
+          >
+            <Quote className="w-12 h-12 text-primary-foreground/20" />
+            <div>
+              <p className="text-lg md:text-xl leading-relaxed mt-6">
+                "Working with Awake transformed our brand completely. Their strategic approach and creative execution exceeded every expectation we had."
+              </p>
+              <div className="mt-6 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[hsl(var(--accent))] flex items-center justify-center text-sm font-bold text-[hsl(var(--accent-foreground))]">JD</div>
+                <div>
+                  <div className="font-semibold">James Donovan</div>
+                  <div className="text-sm text-primary-foreground/60">CEO, TechVault</div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Stats card */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="rounded-2xl bg-[hsl(var(--accent))] p-8 flex flex-col justify-between"
+          >
+            <span className="text-sm font-medium text-[hsl(var(--accent-foreground))]">Facts & Numbers</span>
+            <div>
+              <div className="text-5xl font-bold text-[hsl(var(--accent-foreground))]">91%</div>
+              <p className="text-sm text-[hsl(var(--accent-foreground))]/70 mt-2">Client satisfaction rate across all projects</p>
+            </div>
+          </motion.div>
+
+          {/* Small testimonial */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="rounded-2xl border border-border bg-card p-6"
+          >
+            <div className="flex gap-1 mb-4">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-[hsl(var(--accent))] text-[hsl(var(--accent))]" />
+              ))}
+            </div>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              "Exceptional design team with a keen eye for detail. They delivered ahead of schedule."
+            </p>
+            <div className="mt-4 flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-[hsl(var(--purple-light))] flex items-center justify-center text-xs font-bold">SR</div>
+              <div>
+                <div className="text-sm font-semibold text-foreground">Sarah Reed</div>
+                <div className="text-xs text-muted-foreground">Founder, Bloom</div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
