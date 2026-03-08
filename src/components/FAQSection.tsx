@@ -8,11 +8,12 @@ import {
 } from "@/components/ui/accordion";
 
 const faqs = [
-  { q: "What services does Awake offer?", a: "We provide end-to-end brand strategy, UI/UX design, web development, digital marketing, and analytics services tailored to your business goals." },
-  { q: "How long does a typical project take?", a: "Most projects take 4-8 weeks depending on scope. We'll provide a detailed timeline during our initial consultation." },
-  { q: "Do you work with early-stage startups?", a: "Absolutely! We love working with startups and have flexible packages designed specifically for early-stage companies." },
-  { q: "What's your revision policy?", a: "Our Starter plan includes 2 revision rounds, and our Pro plan includes unlimited revisions to ensure you're completely satisfied." },
+  { q: "What services does DEVZeroOne offer?", a: "We provide end-to-end Shopify solutions including store design, store redesign, custom development, dropshipping setup, store optimization, and growth strategy for DTC brands." },
+  { q: "How long does a typical Shopify store take to build?", a: "Depending on the package, our Basic plan delivers in 7 days, Standard in 10 days, and Premium in 14 days." },
+  { q: "Do you work with new brands that don't have products yet?", a: "Absolutely! We offer winning product research and complete dropshipping setup to help you start from scratch." },
+  { q: "What's your revision policy?", a: "All our plans include unlimited revisions to ensure you're completely satisfied with the final result." },
   { q: "Can I upgrade my plan later?", a: "Yes, you can upgrade at any time. We'll seamlessly transition your project to the new plan with no disruption." },
+  { q: "Do you provide ongoing support after delivery?", a: "Yes, we provide post-launch support to ensure everything runs smoothly and help you with any questions or updates needed." },
 ];
 
 export default function FAQSection() {

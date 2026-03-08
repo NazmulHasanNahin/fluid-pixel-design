@@ -14,7 +14,7 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.7 }}
           className="text-3xl md:text-5xl font-bold text-center text-foreground"
         >
-          What our <span className="font-serif-display italic font-normal">valued</span> customers
+          What our <span className="font-serif-display italic font-normal">valued</span> clients
           <br />are saying about us
         </motion.h2>
 
@@ -35,13 +35,13 @@ export default function TestimonialsSection() {
             </motion.div>
             <div>
               <p className="text-lg md:text-xl leading-relaxed mt-6">
-                "Working with Awake transformed our brand completely. Their strategic approach and creative execution exceeded every expectation we had."
+                "Working with DEVZeroOne transformed our online store completely. Their strategic approach to Shopify development and conversion optimization exceeded every expectation we had."
               </p>
               <div className="mt-6 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[hsl(var(--accent))] flex items-center justify-center text-sm font-bold text-[hsl(var(--accent-foreground))]">JD</div>
+                <div className="w-10 h-10 rounded-full bg-[hsl(var(--accent))] flex items-center justify-center text-sm font-bold text-[hsl(var(--accent-foreground))]">MK</div>
                 <div>
-                  <div className="font-semibold">James Donovan</div>
-                  <div className="text-sm text-primary-foreground/60">CEO, TechVault</div>
+                  <div className="font-semibold">Michael Kim</div>
+                  <div className="text-sm text-primary-foreground/60">Founder, NeurospicyKidz</div>
                 </div>
               </div>
             </div>
@@ -63,7 +63,7 @@ export default function TestimonialsSection() {
                 transition={{ duration: 0.6, delay: 0.5, type: "spring", stiffness: 200 }}
                 className="text-5xl font-bold text-[hsl(var(--accent-foreground))]"
               >
-                91%
+                98%
               </motion.div>
               <p className="text-sm text-[hsl(var(--accent-foreground))]/70 mt-2">Client satisfaction rate across all projects</p>
             </div>
@@ -90,13 +90,13 @@ export default function TestimonialsSection() {
               ))}
             </div>
             <p className="text-sm text-foreground leading-relaxed font-medium">
-              "Awake Design Agency brought our ideas to life with exceptional creativity and precision, exceeding expectations."
+              "DEVZeroOne built our Shopify store from scratch with exceptional attention to detail. Sales increased by 40% within the first month of launch."
             </p>
             <div className="mt-4 flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-[hsl(var(--purple-light))] flex items-center justify-center text-xs font-bold">SR</div>
               <div>
                 <div className="text-sm font-semibold text-foreground">Sarah Reed</div>
-                <div className="text-xs text-muted-foreground">Founder, Bloom</div>
+                <div className="text-xs text-muted-foreground">Owner, Noeva Boutique</div>
               </div>
             </div>
           </motion.div>

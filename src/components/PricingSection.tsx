@@ -4,24 +4,43 @@ import { Check, ArrowRight } from "lucide-react";
 
 const plans = [
   {
-    name: "Starter",
-    price: "$2,500",
-    period: "/mo",
-    description: "Perfect for early-stage startups",
+    name: "Basic",
+    subtitle: "ONE PRODUCT SHOPIFY STORE DESIGN",
+    price: "$80",
+    period: "",
+    description: "Shopify Store Design + Shopify Free Theme + One Product Research + Logo + Branding",
+    delivery: "7-day delivery • Unlimited Revisions",
     bg: "bg-[hsl(var(--yellow-light))]",
     text: "text-foreground",
     btnClass: "bg-primary text-primary-foreground",
-    features: ["Brand Strategy Session", "Logo & Identity Design", "1 Landing Page", "Social Media Kit", "2 Revision Rounds"],
+    badge: false,
+    features: ["Functional website", "1 page", "Responsive design", "Content upload", "2 plugins/extensions", "E-commerce functionality", "1 product", "Payment Integration", "Opt-in form", "Autoresponder integration", "Speed optimization", "Hosting setup", "Social media icons"],
   },
   {
-    name: "Pro",
-    price: "$3,800",
-    period: "/mo",
-    description: "For growing brands that need more",
+    name: "Standard",
+    subtitle: "STANDARD SHOPIFY STORE DESIGN",
+    price: "$250",
+    period: "",
+    description: "Shopify Store Design or Redesign + 20 Product Store + Winning Product Research + Logo + Branding",
+    delivery: "10-day delivery • Unlimited Revisions",
     bg: "bg-[hsl(var(--purple))]",
     text: "text-white",
     btnClass: "bg-white text-foreground",
-    features: ["Everything in Starter", "Full Website (up to 8 pages)", "SEO Optimization", "Motion & Micro-animations", "Unlimited Revisions"],
+    badge: true,
+    features: ["Functional website", "5 pages", "Responsive design", "Content upload", "4 plugins/extensions", "E-commerce functionality", "20 products", "Payment Integration", "Opt-in form", "Autoresponder integration", "Speed optimization", "Hosting setup", "Social media icons"],
+  },
+  {
+    name: "Premium",
+    subtitle: "PREMIUM SHOPIFY STORE DESIGN",
+    price: "$300",
+    period: "",
+    description: "Premium Store Design + 50 Products + Branding + SEO + Winning Product Research + Apps Installation",
+    delivery: "14-day delivery • Unlimited Revisions",
+    bg: "bg-[hsl(var(--blue-light))]",
+    text: "text-foreground",
+    btnClass: "bg-primary text-primary-foreground",
+    badge: false,
+    features: ["Functional website", "7 pages", "Responsive design", "Content upload", "6 plugins/extensions", "E-commerce functionality", "50 products", "Payment Integration", "Opt-in form", "Autoresponder integration", "Speed optimization", "Hosting setup", "Social media icons"],
   },
 ];
 
@@ -30,18 +49,21 @@ export default function PricingSection() {
 
   return (
     <section id="pricing" ref={ref} className="py-24 px-6">
-      <div className="max-w-5xl mx-auto">
-        <motion.h2
+      <div className="max-w-6xl mx-auto">
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-3xl md:text-5xl font-bold text-center text-foreground"
+          className="text-center"
         >
-          Pick the plan that fits your{" "}
-          <span className="font-serif-display italic font-normal">start-up</span>
-        </motion.h2>
+          <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">Pricing</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground">
+            Choose Your Best{" "}
+            <span className="font-serif-display italic font-normal">Package</span>
+          </h2>
+        </motion.div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
           {plans.map((p, i) => (
             <motion.div
               key={p.name}
@@ -49,9 +71,15 @@ export default function PricingSection() {
               animate={isVisible ? { opacity: 1, y: 0, rotateX: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.2 * i, type: "spring", stiffness: 120 }}
               whileHover={{ y: -10, boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)" }}
-              className={`${p.bg} ${p.text} rounded-3xl p-8 md:p-10 flex flex-col`}
+              className={`${p.bg} ${p.text} rounded-3xl p-8 md:p-10 flex flex-col relative`}
             >
+              {p.badge && (
+                <span className="absolute top-4 right-4 bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))] text-xs font-bold px-3 py-1 rounded-full">
+                  BEST VALUE
+                </span>
+              )}
               <span className="text-sm font-medium opacity-80">{p.name}</span>
+              <p className="text-xs opacity-60 mt-1">{p.subtitle}</p>
               <div className="mt-4 flex items-end gap-1">
                 <motion.span
                   initial={{ opacity: 0, scale: 0.5 }}
@@ -61,20 +89,23 @@ export default function PricingSection() {
                 >
                   {p.price}
                 </motion.span>
-                <span className="text-lg opacity-60 mb-1">{p.period}</span>
               </div>
-              <p className="mt-2 text-sm opacity-70">{p.description}</p>
+              <p className="mt-2 text-xs opacity-70 leading-relaxed">{p.description}</p>
+              <p className="mt-2 text-xs font-medium opacity-80">{p.delivery}</p>
 
-              <ul className="mt-8 space-y-3 flex-1">
+              <div className="mt-6 mb-2">
+                <p className="text-xs font-semibold opacity-80 mb-3">What's Included</p>
+              </div>
+              <ul className="space-y-2 flex-1">
                 {p.features.map((f, fi) => (
                   <motion.li
                     key={f}
                     initial={{ opacity: 0, x: -15 }}
                     animate={isVisible ? { opacity: 1, x: 0 } : {}}
-                    transition={{ duration: 0.4, delay: 0.4 + 0.2 * i + fi * 0.06 }}
-                    className="flex items-center gap-3 text-sm"
+                    transition={{ duration: 0.4, delay: 0.4 + 0.2 * i + fi * 0.04 }}
+                    className="flex items-center gap-3 text-xs"
                   >
-                    <Check className="w-4 h-4 flex-shrink-0" />
+                    <Check className="w-3.5 h-3.5 flex-shrink-0" />
                     {f}
                   </motion.li>
                 ))}
@@ -85,7 +116,7 @@ export default function PricingSection() {
                 whileTap={{ scale: 0.97 }}
                 className={`${p.btnClass} mt-8 flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-sm font-semibold transition-opacity`}
               >
-                Get Started <ArrowRight className="w-4 h-4" />
+                Book a Call <ArrowRight className="w-4 h-4" />
               </motion.button>
             </motion.div>
           ))}

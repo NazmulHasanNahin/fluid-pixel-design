@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { Diamond, ArrowRight, Menu, X } from "lucide-react";
+import { Code, ArrowRight, Menu, X } from "lucide-react";
 import { motion, AnimatePresence, useScroll } from "framer-motion";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useActiveSection } from "@/hooks/useActiveSection";
 
-const links = ["Home", "About us", "Services", "Work", "Pricing", "FAQ"];
+const links = ["Home", "Services", "Portfolio", "Pricing", "About", "FAQ"];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -18,12 +18,15 @@ export default function Navbar() {
     return () => unsubscribe();
   }, [scrollY]);
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id.toLowerCase().replace(/\s/g, ""))?.scrollIntoView({ behavior: "smooth" });
-    setOpen(false);
+  const getLinkId = (label: string) => {
+    if (label === "About") return "about";
+    return label.toLowerCase().replace(/\s/g, "");
   };
 
-  const getLinkId = (label: string) => label.toLowerCase().replace(/\s/g, "");
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setOpen(false);
+  };
 
   return (
     <motion.nav
@@ -42,25 +45,25 @@ export default function Navbar() {
           className="flex items-center gap-2 text-foreground font-bold text-xl"
           whileHover={{ scale: 1.03 }}
         >
-          <Diamond className="w-5 h-5" />
-          Awake
+          <Code className="w-5 h-5" />
+          DEVZeroOne
         </motion.a>
 
         <div className="hidden md:flex items-center gap-1 bg-muted/60 rounded-full px-1.5 py-1 relative">
           {links.map((l, i) => {
-            const isActive = activeSection === getLinkId(l);
+            const linkId = getLinkId(l);
+            const isActive = activeSection === linkId;
             return (
               <motion.button
                 key={l}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 + i * 0.05 }}
-                onClick={() => scrollTo(l)}
+                onClick={() => scrollTo(linkId)}
                 className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors z-10 ${
                   isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                {/* Liquid glass active indicator */}
                 {isActive && (
                   <motion.div
                     layoutId="activeNavPill"
@@ -86,10 +89,9 @@ export default function Navbar() {
             whileTap={{ scale: 0.95 }}
             className="group relative flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold overflow-hidden"
           >
-            {/* Shimmer sweep on hover */}
             <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
             <span className="relative z-10 flex items-center gap-2">
-              Let's Collaborate
+              Book A Free Call
               <motion.span
                 className="inline-block"
                 animate={{ x: [0, 4, 0] }}
@@ -120,14 +122,15 @@ export default function Navbar() {
           >
             <div className="flex flex-col p-4 gap-2">
               {links.map((l, i) => {
-                const isActive = activeSection === getLinkId(l);
+                const linkId = getLinkId(l);
+                const isActive = activeSection === linkId;
                 return (
                   <motion.button
                     key={l}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.05 }}
-                    onClick={() => scrollTo(l)}
+                    onClick={() => scrollTo(linkId)}
                     className={`text-left px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
                       isActive
                         ? "text-foreground bg-muted/80 backdrop-blur-sm"
@@ -145,7 +148,7 @@ export default function Navbar() {
                 onClick={() => scrollTo("contact")}
                 className="mt-2 flex items-center justify-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-full text-sm font-semibold"
               >
-                Let's Collaborate <ArrowRight className="w-4 h-4" />
+                Book A Free Call <ArrowRight className="w-4 h-4" />
               </motion.button>
             </div>
           </motion.div>

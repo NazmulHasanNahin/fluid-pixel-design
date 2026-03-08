@@ -1,45 +1,21 @@
 import { motion } from "framer-motion";
-import { useScrollAnimation, useCountUp } from "@/hooks/useScrollAnimation";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { Heart, Handshake, ThumbsUp, TrendingUp, BarChart3, Brain } from "lucide-react";
 
-const badges = [
-  { label: "🎨 Creativity", bg: "bg-[hsl(var(--purple-light))]", text: "text-[hsl(var(--purple))]" },
-  { label: "🚀 Innovation", bg: "bg-[hsl(var(--green-light))]", text: "text-foreground" },
-  { label: "📐 Strategy", bg: "bg-[hsl(var(--yellow-light))]", text: "text-[hsl(var(--accent-foreground))]" },
+const values = [
+  { icon: Heart, title: "Treats your business like our own", desc: "We work with full ownership and responsibility, focusing on what truly benefits your business growth and long-term success.", bg: "bg-[hsl(var(--purple-light))]" },
+  { icon: Handshake, title: "Trusted business partner", desc: "More than a service provider, we collaborate closely with you to understand goals and build strategies that deliver results.", bg: "bg-[hsl(var(--green-light))]" },
+  { icon: ThumbsUp, title: "Client satisfaction is top priority", desc: "Your satisfaction drives every decision we make, ensuring quality delivery, clear communication, and consistent improvements.", bg: "bg-[hsl(var(--yellow-light))]" },
+  { icon: TrendingUp, title: "Focus on long-term growth", desc: "We design scalable solutions that support sustainable growth instead of short-term wins or quick fixes.", bg: "bg-[hsl(var(--pink-light))]" },
+  { icon: BarChart3, title: "Delivers real results", desc: "Our strategies are data-driven and conversion-focused, helping you increase sales, engagement, and overall performance.", bg: "bg-[hsl(var(--blue-light))]" },
+  { icon: Brain, title: "Data-driven decision making", desc: "We analyze user behavior and performance metrics to make informed decisions that improve conversions and maximize ROI.", bg: "bg-[hsl(var(--peach-light))]" },
 ];
-
-const stats = [
-  { prefix: "+", value: 40, label: "Projects Completed" },
-  { prefix: "+", value: 15, label: "Years of Experience" },
-  { prefix: "+", value: 12, label: "Awards Won" },
-];
-
-function StatCard({ prefix, value, label, isVisible, index }: { prefix: string; value: number; label: string; isVisible: boolean; index: number }) {
-  const count = useCountUp(value, isVisible);
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40, scale: 0.9 }}
-      animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : {}}
-      transition={{ duration: 0.6, delay: 0.4 + index * 0.15, type: "spring", stiffness: 150 }}
-      className="text-center"
-    >
-      <motion.div
-        className="text-5xl md:text-6xl font-bold text-foreground"
-        animate={isVisible ? { scale: [1, 1.05, 1] } : {}}
-        transition={{ duration: 0.3, delay: 0.4 + index * 0.15 + 0.5 }}
-      >
-        <span className="text-3xl md:text-4xl align-top">{prefix}</span>
-        {count}
-      </motion.div>
-      <div className="mt-2 text-sm text-muted-foreground">{label}</div>
-    </motion.div>
-  );
-}
 
 export default function AboutStats() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="aboutus" ref={ref} className="py-24 px-6">
+    <section id="about" ref={ref} className="py-24 px-6">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -47,31 +23,27 @@ export default function AboutStats() {
           transition={{ duration: 0.7 }}
           className="text-center"
         >
-          <p className="text-lg md:text-xl text-foreground max-w-3xl mx-auto leading-relaxed">
-            We fuse{" "}
-            {badges.map((b, i) => (
-              <span key={b.label}>
-                <motion.span
-                  initial={{ opacity: 0, scale: 0, rotate: -10 }}
-                  animate={isVisible ? { opacity: 1, scale: 1, rotate: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.3 + i * 0.1, type: "spring", stiffness: 300 }}
-                  className={`${b.bg} ${b.text} px-3 py-1 rounded-full text-sm font-medium inline-block`}
-                >
-                  {b.label}
-                </motion.span>
-                {i < badges.length - 1 && (i === badges.length - 2 ? " & " : ", ")}
-              </span>
-            ))}
-            <br />
-            to craft exceptional, digital experiences strategy, and
-            <br />
-            technology to drive exceptional, impactful results.
-          </p>
+          <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">The Difference</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground">
+            Why Choose{" "}
+            <span className="font-serif-display italic font-normal">DEVZeroOne</span>
+          </h2>
         </motion.div>
 
-        <div className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-12">
-          {stats.map((s, i) => (
-            <StatCard key={s.label} {...s} isVisible={isVisible} index={i} />
+        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {values.map((v, i) => (
+            <motion.div
+              key={v.title}
+              initial={{ opacity: 0, y: 40, scale: 0.9 }}
+              animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 + i * 0.1, type: "spring", stiffness: 150 }}
+              whileHover={{ y: -6, scale: 1.02 }}
+              className={`${v.bg} rounded-2xl p-6 cursor-pointer transition-colors duration-300`}
+            >
+              <v.icon className="w-8 h-8 text-foreground mb-4" />
+              <h3 className="text-sm font-semibold text-foreground mb-2">{v.title}</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">{v.desc}</p>
+            </motion.div>
           ))}
         </div>
       </div>
