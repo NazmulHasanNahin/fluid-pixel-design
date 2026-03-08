@@ -21,12 +21,18 @@ export default function TestimonialsSection() {
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto">
           {/* Large testimonial */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            initial={{ opacity: 0, x: -40 }}
+            animate={isVisible ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.1, type: "spring", stiffness: 100 }}
+            whileHover={{ scale: 1.02 }}
             className="md:col-span-2 md:row-span-2 rounded-2xl bg-primary text-primary-foreground p-8 md:p-12 flex flex-col justify-between relative overflow-hidden min-h-[320px]"
           >
-            <Quote className="w-12 h-12 text-primary-foreground/20" />
+            <motion.div
+              animate={{ rotate: [0, 5, -5, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Quote className="w-12 h-12 text-primary-foreground/20" />
+            </motion.div>
             <div>
               <p className="text-lg md:text-xl leading-relaxed mt-6">
                 "Working with Awake transformed our brand completely. Their strategic approach and creative execution exceeded every expectation we had."
@@ -45,12 +51,20 @@ export default function TestimonialsSection() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            whileHover={{ scale: 1.03, rotate: 1 }}
             className="rounded-2xl bg-[hsl(var(--accent))] p-8 flex flex-col justify-between"
           >
             <span className="text-sm font-medium text-[hsl(var(--accent-foreground))]">Facts & Numbers</span>
             <div>
-              <div className="text-5xl font-bold text-[hsl(var(--accent-foreground))]">91%</div>
+              <motion.div
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={isVisible ? { scale: 1, opacity: 1 } : {}}
+                transition={{ duration: 0.6, delay: 0.5, type: "spring", stiffness: 200 }}
+                className="text-5xl font-bold text-[hsl(var(--accent-foreground))]"
+              >
+                91%
+              </motion.div>
               <p className="text-sm text-[hsl(var(--accent-foreground))]/70 mt-2">Client satisfaction rate across all projects</p>
             </div>
           </motion.div>
@@ -59,12 +73,20 @@ export default function TestimonialsSection() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.35 }}
+            whileHover={{ scale: 1.03 }}
             className="rounded-2xl border border-border bg-card p-6"
           >
             <div className="flex gap-1 mb-4">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-[hsl(var(--accent))] text-[hsl(var(--accent))]" />
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ delay: 0.5 + i * 0.08, type: "spring", stiffness: 400 }}
+                >
+                  <Star className="w-4 h-4 fill-[hsl(var(--accent))] text-[hsl(var(--accent))]" />
+                </motion.div>
               ))}
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">

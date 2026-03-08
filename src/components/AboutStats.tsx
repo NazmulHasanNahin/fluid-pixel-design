@@ -13,13 +13,24 @@ const stats = [
   { value: 12, suffix: "+", label: "Awards Won" },
 ];
 
-function StatCard({ value, suffix, label, isVisible }: { value: number; suffix: string; label: string; isVisible: boolean }) {
+function StatCard({ value, suffix, label, isVisible, index }: { value: number; suffix: string; label: string; isVisible: boolean; index: number }) {
   const count = useCountUp(value, isVisible);
   return (
-    <div className="text-center">
-      <div className="text-5xl md:text-6xl font-bold text-foreground">{count}{suffix}</div>
+    <motion.div
+      initial={{ opacity: 0, y: 40, scale: 0.9 }}
+      animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{ duration: 0.6, delay: 0.4 + index * 0.15, type: "spring", stiffness: 150 }}
+      className="text-center"
+    >
+      <motion.div
+        className="text-5xl md:text-6xl font-bold text-foreground"
+        animate={isVisible ? { scale: [1, 1.05, 1] } : {}}
+        transition={{ duration: 0.3, delay: 0.4 + index * 0.15 + 0.5 }}
+      >
+        {count}{suffix}
+      </motion.div>
       <div className="mt-2 text-sm text-muted-foreground">{label}</div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -40,24 +51,25 @@ export default function AboutStats() {
             <span className="font-serif-display italic font-normal">strategies</span>
           </h2>
           <div className="flex items-center justify-center gap-3 mt-6 flex-wrap">
-            {badges.map((b) => (
-              <span key={b.label} className={`${b.bg} ${b.text} px-4 py-1.5 rounded-full text-sm font-medium`}>
+            {badges.map((b, i) => (
+              <motion.span
+                key={b.label}
+                initial={{ opacity: 0, scale: 0, rotate: -10 }}
+                animate={isVisible ? { opacity: 1, scale: 1, rotate: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.3 + i * 0.1, type: "spring", stiffness: 300 }}
+                className={`${b.bg} ${b.text} px-4 py-1.5 rounded-full text-sm font-medium`}
+              >
                 {b.label}
-              </span>
+              </motion.span>
             ))}
           </div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-12"
-        >
-          {stats.map((s) => (
-            <StatCard key={s.label} {...s} isVisible={isVisible} />
+        <div className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-12">
+          {stats.map((s, i) => (
+            <StatCard key={s.label} {...s} isVisible={isVisible} index={i} />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

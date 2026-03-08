@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { ArrowUpRight } from "lucide-react";
 
 const projects = [
   { title: "Elevate App", tags: ["UX Research", "Interface Design"], img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop" },
@@ -28,18 +29,30 @@ export default function PortfolioSection() {
           {projects.map((p, i) => (
             <motion.div
               key={p.title}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 50 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 * i }}
+              transition={{ duration: 0.6, delay: 0.12 * i, type: "spring", stiffness: 120 }}
+              whileHover={{ y: -6 }}
               className="group rounded-2xl overflow-hidden border border-border bg-card cursor-pointer"
             >
-              <div className="overflow-hidden">
-                <img
+              <div className="overflow-hidden relative">
+                <motion.img
                   src={p.img}
                   alt={p.title}
-                  className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-56 object-cover"
                   loading="lazy"
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
                 />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  className="absolute inset-0 bg-primary/40 flex items-center justify-center"
+                >
+                  <div className="w-12 h-12 rounded-full bg-background flex items-center justify-center">
+                    <ArrowUpRight className="w-5 h-5 text-foreground" />
+                  </div>
+                </motion.div>
               </div>
               <div className="p-5">
                 <h3 className="text-lg font-semibold text-foreground">{p.title}</h3>

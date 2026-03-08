@@ -45,30 +45,48 @@ export default function PricingSection() {
           {plans.map((p, i) => (
             <motion.div
               key={p.name}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.15 * i }}
+              initial={{ opacity: 0, y: 50, rotateX: 10 }}
+              animate={isVisible ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.2 * i, type: "spring", stiffness: 120 }}
+              whileHover={{ y: -10, boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)" }}
               className={`${p.bg} ${p.text} rounded-3xl p-8 md:p-10 flex flex-col`}
             >
               <span className="text-sm font-medium opacity-80">{p.name}</span>
               <div className="mt-4 flex items-end gap-1">
-                <span className="text-4xl md:text-5xl font-bold">{p.price}</span>
+                <motion.span
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 0.3 + 0.2 * i, type: "spring", stiffness: 200 }}
+                  className="text-4xl md:text-5xl font-bold"
+                >
+                  {p.price}
+                </motion.span>
                 <span className="text-lg opacity-60 mb-1">{p.period}</span>
               </div>
               <p className="mt-2 text-sm opacity-70">{p.description}</p>
 
               <ul className="mt-8 space-y-3 flex-1">
-                {p.features.map((f) => (
-                  <li key={f} className="flex items-center gap-3 text-sm">
+                {p.features.map((f, fi) => (
+                  <motion.li
+                    key={f}
+                    initial={{ opacity: 0, x: -15 }}
+                    animate={isVisible ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.4, delay: 0.4 + 0.2 * i + fi * 0.06 }}
+                    className="flex items-center gap-3 text-sm"
+                  >
                     <Check className="w-4 h-4 flex-shrink-0" />
                     {f}
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
 
-              <button className={`${p.btnClass} mt-8 flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity`}>
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                className={`${p.btnClass} mt-8 flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-sm font-semibold transition-opacity`}
+              >
                 Get Started <ArrowRight className="w-4 h-4" />
-              </button>
+              </motion.button>
             </motion.div>
           ))}
         </div>

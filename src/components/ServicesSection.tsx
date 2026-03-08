@@ -30,12 +30,28 @@ export default function ServicesSection() {
           {services.map((s, i) => (
             <motion.div
               key={s.label}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 * i }}
-              className={`${s.bg} rounded-2xl p-6 flex flex-col items-center text-center gap-4 cursor-pointer hover:scale-105 transition-transform duration-300`}
+              initial={{ opacity: 0, y: 40, scale: 0.8 }}
+              animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{
+                duration: 0.5,
+                delay: 0.15 * i,
+                type: "spring",
+                stiffness: 200,
+                damping: 20,
+              }}
+              whileHover={{
+                scale: 1.08,
+                y: -8,
+                boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)",
+              }}
+              className={`${s.bg} rounded-2xl p-6 flex flex-col items-center text-center gap-4 cursor-pointer transition-colors duration-300`}
             >
-              <s.icon className="w-8 h-8 text-foreground" />
+              <motion.div
+                whileHover={{ rotate: [0, -10, 10, 0] }}
+                transition={{ duration: 0.4 }}
+              >
+                <s.icon className="w-8 h-8 text-foreground" />
+              </motion.div>
               <span className="text-sm font-semibold text-foreground">{s.label}</span>
             </motion.div>
           ))}
