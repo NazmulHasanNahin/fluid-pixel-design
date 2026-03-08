@@ -34,7 +34,7 @@ export default function HeroSection() {
   const { displayedText: typed2, isComplete: done2, showCursor } = useTypingAnimation(headlinePart2, 45, 400 + headlinePart1.length * 45 + 100);
 
   return (
-    <section ref={sectionRef} className="pt-32 pb-20 px-6 overflow-hidden">
+    <section ref={sectionRef} className="relative w-full pt-44 2xl:pb-20 pb-10 px-6 overflow-hidden before:absolute before:w-full before:h-full before:bg-gradient-to-r before:from-sky-100 before:via-white before:to-amber-100 before:rounded-full before:top-24 before:blur-3xl before:-z-10 dark:before:from-slate-800 dark:before:via-black dark:before:to-stone-700 dark:before:rounded-full dark:before:blur-3xl dark:before:-z-10">
       <motion.div
         style={{ y: yParallax, opacity: opacityParallax }}
         className="max-w-5xl mx-auto text-center"
