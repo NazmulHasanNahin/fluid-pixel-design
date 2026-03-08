@@ -29,17 +29,18 @@ export default function Navbar() {
   };
 
   return (
-    <motion.nav
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-[94%] max-w-6xl rounded-full ${
-        scrolled
-          ? "bg-background/90 backdrop-blur-xl border border-border shadow-lg"
-          : "bg-background/80 backdrop-blur-lg border border-border"
-      }`}
-    >
-      <div className="flex items-center justify-between px-4 md:px-6 py-3">
+    <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
+      <motion.nav
+        initial={{ y: -80 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className={`w-full max-w-6xl rounded-full transition-all duration-300 ${
+          scrolled
+            ? "bg-background/90 backdrop-blur-xl border border-border shadow-lg"
+            : "bg-background/80 backdrop-blur-lg border border-border"
+        }`}
+      >
+        <div className="flex items-center justify-between px-4 md:px-6 py-3">
         {/* Logo */}
         <motion.a
           href="#"
@@ -158,6 +159,7 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+      </motion.nav>
+    </div>
   );
 }
