@@ -3,10 +3,10 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { ArrowUpRight } from "lucide-react";
 
 const projects = [
-  { title: "Elevate App", tags: ["UX Research", "Interface Design"], img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop" },
-  { title: "Bloom Studio", tags: ["Brand Strategy", "Web Design"], img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" },
-  { title: "Nova Dashboard", tags: ["Product Design", "Development"], img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" },
-  { title: "Pulse Analytics", tags: ["Data Viz", "UI Design"], img: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&h=400&fit=crop" },
+  { title: "Elevate App", tags: ["UX Research", "Interface Design"], img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop", span: "" },
+  { title: "Bloom Studio", tags: ["Brand Strategy", "Web Design"], img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop", span: "" },
+  { title: "Genome", tags: ["Brand Identity", "Web"], img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop", span: "md:col-span-1" },
+  { title: "Pulse Analytics", tags: ["Data Viz", "UI Design"], img: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&h=400&fit=crop", span: "md:col-span-1" },
 ];
 
 export default function PortfolioSection() {
@@ -21,8 +21,8 @@ export default function PortfolioSection() {
           transition={{ duration: 0.7 }}
           className="text-3xl md:text-5xl font-bold text-center text-foreground"
         >
-          Elevating your business's{" "}
-          <span className="font-serif-display italic font-normal">online presence</span>
+          How we <span className="font-serif-display italic font-normal">transformed</span> a small
+          <br />business's online presence
         </motion.h2>
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -33,7 +33,7 @@ export default function PortfolioSection() {
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.12 * i, type: "spring", stiffness: 120 }}
               whileHover={{ y: -6 }}
-              className="group rounded-2xl overflow-hidden border border-border bg-card cursor-pointer"
+              className={`group rounded-2xl overflow-hidden border border-border bg-card cursor-pointer ${p.span}`}
             >
               <div className="overflow-hidden relative">
                 <motion.img

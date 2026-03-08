@@ -14,8 +14,8 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.7 }}
           className="text-3xl md:text-5xl font-bold text-center text-foreground"
         >
-          What clients are saying{" "}
-          <span className="font-serif-display italic font-normal">about us</span>
+          What our <span className="font-serif-display italic font-normal">valued</span> customers
+          <br />are saying about us
         </motion.h2>
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto">
@@ -69,13 +69,13 @@ export default function TestimonialsSection() {
             </div>
           </motion.div>
 
-          {/* Small testimonial */}
+          {/* Quote testimonial */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.35 }}
             whileHover={{ scale: 1.03 }}
-            className="rounded-2xl border border-border bg-card p-6"
+            className="rounded-2xl border border-border bg-card p-6 flex flex-col justify-between"
           >
             <div className="flex gap-1 mb-4">
               {[...Array(5)].map((_, i) => (
@@ -89,8 +89,8 @@ export default function TestimonialsSection() {
                 </motion.div>
               ))}
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              "Exceptional design team with a keen eye for detail. They delivered ahead of schedule."
+            <p className="text-sm text-foreground leading-relaxed font-medium">
+              "Awake Design Agency brought our ideas to life with exceptional creativity and precision, exceeding expectations."
             </p>
             <div className="mt-4 flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-[hsl(var(--purple-light))] flex items-center justify-center text-xs font-bold">SR</div>
