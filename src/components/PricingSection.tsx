@@ -50,7 +50,7 @@ const cardFade = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay: 0.15 * i, ease: "easeOut" },
+    transition: { duration: 0.7, delay: 0.15 * i, ease: "easeOut" as Easing },
   }),
 };
 
