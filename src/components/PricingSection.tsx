@@ -25,7 +25,7 @@ const plans = [
     delivery: "10-day delivery • Unlimited Revisions",
     bg: "bg-[hsl(var(--purple))]",
     text: "text-white",
-    btnClass: "bg-white text-foreground",
+    btnClass: "bg-white text-[hsl(var(--purple))]",
     badge: true,
     features: ["Functional website", "5 pages", "Responsive design", "Content upload", "4 plugins/extensions", "E-commerce functionality", "20 products", "Payment Integration", "Opt-in form", "Autoresponder integration", "Speed optimization", "Hosting setup", "Social media icons"],
   },

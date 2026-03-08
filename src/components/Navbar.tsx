@@ -118,7 +118,7 @@ export default function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden bg-background border-t border-border"
+            className="md:hidden overflow-hidden bg-background/95 backdrop-blur-xl border-t border-border/50 rounded-b-2xl"
           >
             <div className="flex flex-col p-4 gap-2">
               {links.map((l, i) => {
