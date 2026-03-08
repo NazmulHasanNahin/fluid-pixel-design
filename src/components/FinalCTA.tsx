@@ -22,10 +22,7 @@ export default function FinalCTA() {
         initial={{ opacity: 0, y: 40, scale: 0.95 }}
         animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : {}}
         transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
-        className="max-w-5xl mx-auto rounded-3xl p-12 md:p-20 relative overflow-hidden"
-        style={{
-          background: "linear-gradient(135deg, hsl(210 80% 92%) 0%, hsl(20 80% 92%) 100%)"
-        }}
+        className="max-w-5xl mx-auto rounded-3xl p-12 md:p-20 relative overflow-hidden cta-gradient"
       >
         {/* Floating decorative elements */}
         <motion.div
