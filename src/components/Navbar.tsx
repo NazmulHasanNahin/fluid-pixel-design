@@ -33,7 +33,7 @@ export default function Navbar() {
       initial={{ y: -80 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-[95%] max-w-6xl rounded-full ${
+      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 max-w-3xl w-auto rounded-full ${
         scrolled
           ? "bg-background/90 backdrop-blur-xl border border-border shadow-lg"
           : "bg-background/80 backdrop-blur-lg border border-border"
