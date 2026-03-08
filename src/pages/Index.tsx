@@ -24,7 +24,7 @@ const Index = () => {
         <CTABanner />
         <PortfolioSection />
         <TeamSection />
-        <TestimonialsSection />
+        
         <PricingSection />
         <FAQSection />
         <FinalCTA />
