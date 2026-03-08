@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
+import BlurTypeText from "@/components/BlurTypeText";
 
 const projects = [
   { title: "NeurospicyKidz", tags: ["Toy", "Shopify Store"], img: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600&h=400&fit=crop", span: "" },
@@ -11,35 +12,52 @@ const projects = [
   { title: "DecalGraphixx", tags: ["Sticker", "Shopify Store"], img: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&h=400&fit=crop", span: "" },
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: 0.08 + i * 0.12, ease: "easeOut" },
+  }),
+};
+
 export default function PortfolioSection() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
     <section id="portfolio" ref={ref} className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center"
-        >
-          <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">Portfolio</p>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground">
+        <div className="text-center">
+          <BlurTypeText
+            text="Portfolio"
+            isVisible={isVisible}
+            className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3"
+          />
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="text-3xl md:text-5xl font-bold text-foreground"
+          >
             Our Recent{" "}
             <span className="font-serif-display italic font-normal">Work</span>
-          </h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Explore some of the successful Shopify stores we've built for clients worldwide.
-          </p>
-        </motion.div>
+          </motion.h2>
+          <BlurTypeText
+            text="Explore some of the successful Shopify stores we've built for clients worldwide."
+            isVisible={isVisible}
+            delay={0.3}
+            className="mt-4 text-muted-foreground max-w-2xl mx-auto"
+          />
+        </div>
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((p, i) => (
             <motion.div
               key={p.title}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.12 * i, type: "spring", stiffness: 120 }}
+              custom={i}
+              initial="hidden"
+              animate={isVisible ? "visible" : "hidden"}
+              variants={fadeUp}
               whileHover={{ y: -6 }}
               className={`group rounded-2xl overflow-hidden border border-border bg-card cursor-pointer ${p.span}`}
             >

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Check, ArrowRight } from "lucide-react";
+import BlurTypeText from "@/components/BlurTypeText";
 
 const plans = [
   {
@@ -44,32 +45,46 @@ const plans = [
   },
 ];
 
+const cardFade = {
+  hidden: { opacity: 0, y: 50 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: 0.15 * i, ease: "easeOut" },
+  }),
+};
+
 export default function PricingSection() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
     <section id="pricing" ref={ref} className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center"
-        >
-          <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">Pricing</p>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground">
+        <div className="text-center">
+          <BlurTypeText
+            text="Pricing"
+            isVisible={isVisible}
+            className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3"
+          />
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="text-3xl md:text-5xl font-bold text-foreground"
+          >
             Choose Your Best{" "}
             <span className="font-serif-display italic font-normal">Package</span>
-          </h2>
-        </motion.div>
+          </motion.h2>
+        </div>
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
           {plans.map((p, i) => (
             <motion.div
               key={p.name}
-              initial={{ opacity: 0, y: 50, rotateX: 10 }}
-              animate={isVisible ? { opacity: 1, y: 0, rotateX: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.2 * i, type: "spring", stiffness: 120 }}
+              custom={i}
+              initial="hidden"
+              animate={isVisible ? "visible" : "hidden"}
+              variants={cardFade}
               whileHover={{ y: -10, boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)" }}
               className={`${p.bg} ${p.text} rounded-3xl p-8 md:p-10 flex flex-col relative`}
             >
@@ -102,7 +117,7 @@ export default function PricingSection() {
                     key={f}
                     initial={{ opacity: 0, x: -15 }}
                     animate={isVisible ? { opacity: 1, x: 0 } : {}}
-                    transition={{ duration: 0.4, delay: 0.4 + 0.2 * i + fi * 0.04 }}
+                    transition={{ duration: 0.4, delay: 0.4 + 0.15 * i + fi * 0.03 }}
                     className="flex items-center gap-3 text-xs"
                   >
                     <Check className="w-3.5 h-3.5 flex-shrink-0" />
