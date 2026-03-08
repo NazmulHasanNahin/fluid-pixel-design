@@ -32,7 +32,6 @@ export default function HeroSection() {
       <div className="absolute inset-0 -z-10 hidden dark:block" style={{
         background: "linear-gradient(135deg, hsl(210 20% 12%) 0%, hsl(0 0% 5%) 50%, hsl(20 15% 12%) 100%)",
       }} />
-    >
       <motion.div
         style={{ y: yParallax, opacity: opacityParallax }}
         className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
