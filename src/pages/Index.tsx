@@ -9,7 +9,6 @@ import TeamSection from "@/components/TeamSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import PricingSection from "@/components/PricingSection";
 import FAQSection from "@/components/FAQSection";
-import AccoladesSection from "@/components/AccoladesSection";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
@@ -20,15 +19,14 @@ const Index = () => {
       <main>
         <HeroSection />
         <LogoMarquee />
-        <AboutStats />
         <ServicesSection />
+        <AboutStats />
         <CTABanner />
         <PortfolioSection />
         <TeamSection />
         <TestimonialsSection />
         <PricingSection />
         <FAQSection />
-        <AccoladesSection />
         <FinalCTA />
       </main>
       <Footer />

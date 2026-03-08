@@ -32,7 +32,7 @@ export default function CTABanner() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-2xl md:text-3xl font-bold"
           >
-            See Our Work in Action.
+            Ready to Start Your Shopify Journey?
           </motion.h3>
           <motion.p
             initial={{ opacity: 0, x: -20 }}
@@ -40,7 +40,7 @@ export default function CTABanner() {
             transition={{ duration: 0.6, delay: 0.35 }}
             className="mt-2 text-primary-foreground/70 text-lg"
           >
-            Start Your Creative Journey with Us!
+            Let's build a store that converts!
           </motion.p>
         </div>
         <motion.div
@@ -54,7 +54,7 @@ export default function CTABanner() {
             whileTap={{ scale: 0.97 }}
             className="flex items-center gap-2 bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))] px-6 py-3 rounded-full text-sm font-semibold transition-colors"
           >
-            Let's Collaborate <ArrowRight className="w-4 h-4" />
+            Book A Free Call <ArrowRight className="w-4 h-4" />
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.05 }}

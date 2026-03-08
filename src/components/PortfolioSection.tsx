@@ -1,31 +1,39 @@
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 
 const projects = [
-  { title: "Elevate App", tags: ["UX Research", "Interface Design"], img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop", span: "" },
-  { title: "Bloom Studio", tags: ["Brand Strategy", "Web Design"], img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop", span: "" },
-  { title: "Genome", tags: ["Brand Identity", "Web"], img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop", span: "md:col-span-1" },
-  { title: "Pulse Analytics", tags: ["Data Viz", "UI Design"], img: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&h=400&fit=crop", span: "md:col-span-1" },
+  { title: "NeurospicyKidz", tags: ["Toy", "Shopify Store"], img: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600&h=400&fit=crop", span: "" },
+  { title: "Esabao", tags: ["Dropshipping", "Shopify Store"], img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop", span: "" },
+  { title: "Noeva Boutique", tags: ["Fashion", "Shopify Store"], img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop", span: "" },
+  { title: "Health Care Store", tags: ["Health Care", "Shopify Store"], img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop", span: "" },
+  { title: "One Product Store", tags: ["One Product", "Shopify Store"], img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=400&fit=crop", span: "" },
+  { title: "DecalGraphixx", tags: ["Sticker", "Shopify Store"], img: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&h=400&fit=crop", span: "" },
 ];
 
 export default function PortfolioSection() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="work" ref={ref} className="py-24 px-6">
+    <section id="portfolio" ref={ref} className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
-        <motion.h2
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-3xl md:text-5xl font-bold text-center text-foreground"
+          className="text-center"
         >
-          How we <span className="font-serif-display italic font-normal">transformed</span> a small
-          <br />business's online presence
-        </motion.h2>
+          <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">Portfolio</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground">
+            Our Recent{" "}
+            <span className="font-serif-display italic font-normal">Work</span>
+          </h2>
+          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+            Explore some of the successful Shopify stores we've built for clients worldwide.
+          </p>
+        </motion.div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((p, i) => (
             <motion.div
               key={p.title}
@@ -65,6 +73,21 @@ export default function PortfolioSection() {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mt-12 text-center"
+        >
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-2 border border-border text-foreground px-8 py-3.5 rounded-full text-sm font-semibold hover:bg-muted transition-colors"
+          >
+            View All Projects <ArrowRight className="w-4 h-4" />
+          </motion.button>
+        </motion.div>
       </div>
     </section>
   );

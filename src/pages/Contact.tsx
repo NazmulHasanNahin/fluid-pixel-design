@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Diamond, ArrowRight, Mail, Phone, MapPin } from "lucide-react";
+import { Code, ArrowRight, Mail, MapPin } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useTypingAnimation } from "@/hooks/useTypingAnimation";
@@ -15,8 +15,8 @@ function ContactNavbar() {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         <a href="/" className="flex items-center gap-2 text-foreground font-bold text-xl">
-          <Diamond className="w-5 h-5" />
-          Awake
+          <Code className="w-5 h-5" />
+          DEVZeroOne
         </a>
         <motion.a
           href="/"
@@ -33,9 +33,8 @@ function ContactNavbar() {
 
 function ContactInfo() {
   const infoItems = [
-    { icon: Mail, label: "Email", value: "hello@awake.studio", bg: "bg-accent/20" },
-    { icon: Phone, label: "Phone", value: "+1 (555) 123-4567", bg: "bg-[hsl(var(--purple-light))]" },
-    { icon: MapPin, label: "Office", value: "123 Design Street, NY 10001", bg: "bg-[hsl(var(--pink-light))]" },
+    { icon: Mail, label: "Email", value: "contact@devzeroone.com", bg: "bg-accent/20" },
+    { icon: MapPin, label: "Location", value: "Worldwide Remote", bg: "bg-[hsl(var(--pink-light))]" },
   ];
 
   return (
@@ -74,7 +73,7 @@ function ContactInfo() {
       >
         <img
           src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=300&fit=crop"
-          alt="Office"
+          alt="Remote workspace"
           className="w-full h-full object-cover"
           loading="lazy"
         />
@@ -85,18 +84,15 @@ function ContactInfo() {
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
-    phone: "",
-    subject: "",
     message: "",
   });
 
-  const headlineText = "project together";
+  const headlineText = "Shopify store";
   const { displayedText, showCursor, isComplete } = useTypingAnimation(headlineText, 60, 600);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -104,17 +100,6 @@ export default function Contact() {
     e.preventDefault();
     console.log("Form submitted:", formData);
   };
-
-  const formFields = [
-    { row: [
-      { name: "firstName", label: "First Name", placeholder: "John", type: "text" },
-      { name: "lastName", label: "Last Name", placeholder: "Doe", type: "text" },
-    ]},
-    { row: [
-      { name: "email", label: "Email", placeholder: "john@example.com", type: "email" },
-      { name: "phone", label: "Phone Number", placeholder: "+1 (555) 000-0000", type: "tel" },
-    ]},
-  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -137,7 +122,7 @@ export default function Contact() {
               Get in touch
             </motion.p>
             <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
-              Let's start your{" "}
+              Let's build your{" "}
               <span className="font-serif-display italic font-normal">
                 {displayedText}
                 <motion.span
@@ -153,7 +138,7 @@ export default function Contact() {
               transition={{ delay: 1.2 }}
               className="mt-4 text-muted-foreground max-w-xl mx-auto"
             >
-              Have a project in mind? We'd love to hear about it. Fill out the form below and we'll get back to you within 24 hours.
+              Ready to build a high-converting Shopify store? Fill out the form below and we'll get back to you within 24 hours.
             </motion.p>
           </motion.div>
 
@@ -165,54 +150,42 @@ export default function Contact() {
               onSubmit={handleSubmit}
               className="lg:col-span-3 space-y-6"
             >
-              {formFields.map((group, gi) => (
-                <div key={gi} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {group.row.map((field, fi) => (
-                    <motion.div
-                      key={field.name}
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3 + gi * 0.1 + fi * 0.05 }}
-                    >
-                      <label className="text-sm font-medium text-foreground mb-1.5 block">{field.label}</label>
-                      <Input
-                        name={field.name}
-                        type={field.type}
-                        placeholder={field.placeholder}
-                        value={formData[field.name as keyof typeof formData]}
-                        onChange={handleChange}
-                        className="rounded-xl h-12 bg-muted/50 border-border"
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-              ))}
-
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: 0.3 }}
               >
-                <label className="text-sm font-medium text-foreground mb-1.5 block">Subject</label>
-                <select
-                  name="subject"
-                  value={formData.subject}
+                <label className="text-sm font-medium text-foreground mb-1.5 block">Your Name</label>
+                <Input
+                  name="name"
+                  type="text"
+                  placeholder="John Doe"
+                  value={formData.name}
                   onChange={handleChange}
-                  className="flex h-12 w-full rounded-xl border border-border bg-muted/50 px-3 py-2 text-sm text-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                >
-                  <option value="">Select a subject</option>
-                  <option value="branding">Brand Strategy</option>
-                  <option value="web">Web Development</option>
-                  <option value="design">UI/UX Design</option>
-                  <option value="marketing">Digital Marketing</option>
-                  <option value="other">Other</option>
-                </select>
+                  className="rounded-xl h-12 bg-muted/50 border-border"
+                />
               </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.55 }}
+                transition={{ delay: 0.4 }}
+              >
+                <label className="text-sm font-medium text-foreground mb-1.5 block">Your Email</label>
+                <Input
+                  name="email"
+                  type="email"
+                  placeholder="john@example.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="rounded-xl h-12 bg-muted/50 border-border"
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
               >
                 <label className="text-sm font-medium text-foreground mb-1.5 block">Message</label>
                 <textarea

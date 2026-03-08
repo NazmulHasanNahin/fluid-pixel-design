@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-const logos = ["Spotify", "Slack", "Notion", "Figma", "Stripe", "Webflow", "Framer", "Linear"];
+const logos = ["Shopify", "Stripe", "Klaviyo", "Oberlo", "DSers", "PageFly", "Loox", "Judge.me"];
 
 export default function LogoMarquee() {
   const { ref, isVisible } = useScrollAnimation();
@@ -14,7 +14,7 @@ export default function LogoMarquee() {
         transition={{ duration: 0.7 }}
       >
         <p className="text-center text-sm text-muted-foreground mb-8">
-          Loved by <span className="font-semibold text-foreground">1000+</span> big and small brands
+          Trusted by <span className="font-semibold text-foreground">DTC brands</span> worldwide
         </p>
         <div className="relative">
           <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
