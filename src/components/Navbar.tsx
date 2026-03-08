@@ -33,22 +33,24 @@ export default function Navbar() {
       initial={{ y: -80 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 max-w-3xl w-auto rounded-full ${
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-[94%] max-w-6xl rounded-full ${
         scrolled
           ? "bg-background/90 backdrop-blur-xl border border-border shadow-lg"
           : "bg-background/80 backdrop-blur-lg border border-border"
       }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <div className="flex items-center justify-between px-4 md:px-6 py-3">
+        {/* Logo */}
         <motion.a
           href="#"
-          className="flex items-center gap-2 text-foreground font-bold text-xl"
+          className="flex items-center gap-2 text-foreground font-bold text-lg"
           whileHover={{ scale: 1.03 }}
         >
           <Code className="w-5 h-5" />
           DEVZeroOne
         </motion.a>
 
+        {/* Center nav links */}
         <div className="hidden md:flex items-center gap-1 bg-muted/60 rounded-full px-1.5 py-1 relative">
           {links.map((l, i) => {
             const linkId = getLinkId(l);
@@ -81,6 +83,7 @@ export default function Navbar() {
           })}
         </div>
 
+        {/* Right side */}
         <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
           <motion.button
@@ -103,6 +106,7 @@ export default function Navbar() {
           </motion.button>
         </div>
 
+        {/* Mobile */}
         <div className="flex md:hidden items-center gap-2">
           <ThemeToggle />
           <button onClick={() => setOpen(!open)} className="text-foreground">
