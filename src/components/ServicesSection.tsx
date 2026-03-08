@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, type Easing } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Palette, RefreshCw, Code, Package, Zap, TrendingUp } from "lucide-react";
+import BlurTypeText from "@/components/BlurTypeText";
 
 const services = [
   { icon: Palette, label: "Shopify Store Design", desc: "Beautiful, conversion-focused store designs that capture your brand and drive sales.", bg: "bg-[hsl(var(--purple-light))]" },
@@ -11,43 +12,54 @@ const services = [
   { icon: TrendingUp, label: "Growth Strategy", desc: "Data-driven strategies to scale your e-commerce business and increase revenue.", bg: "bg-[hsl(var(--yellow-light))]" },
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: 0.1 + i * 0.1, ease: "easeOut" as Easing },
+  }),
+};
+
 export default function ServicesSection() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
     <section id="services" ref={ref} className="py-24 px-6 bg-muted/30">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center"
-        >
-          <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">What We Do</p>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground">
+        <div className="text-center">
+          <BlurTypeText
+            text="What We Do"
+            isVisible={isVisible}
+            className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3"
+          />
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="text-3xl md:text-5xl font-bold text-foreground"
+          >
             Our{" "}
             <span className="font-serif-display italic font-normal">Services</span>
-          </h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            End-to-end Shopify solutions designed to help your brand grow from zero to one.
-          </p>
-        </motion.div>
+          </motion.h2>
+          <BlurTypeText
+            text="End-to-end Shopify solutions designed to help your brand grow from zero to one."
+            isVisible={isVisible}
+            delay={0.3}
+            className="mt-4 text-muted-foreground max-w-2xl mx-auto"
+          />
+        </div>
 
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {services.map((s, i) => (
             <motion.div
               key={s.label}
-              initial={{ opacity: 0, y: 40, scale: 0.8 }}
-              animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{
-                duration: 0.5,
-                delay: 0.15 * i,
-                type: "spring",
-                stiffness: 200,
-                damping: 20,
-              }}
+              custom={i}
+              initial="hidden"
+              animate={isVisible ? "visible" : "hidden"}
+              variants={fadeUp}
               whileHover={{
-                scale: 1.08,
+                scale: 1.05,
                 y: -8,
                 boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)",
               }}
