@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { Diamond, ArrowRight, Menu, X } from "lucide-react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
+import ThemeToggle from "@/components/ThemeToggle";
+import { useActiveSection } from "@/hooks/useActiveSection";
 
 const links = ["Home", "About us", "Services", "Work", "Pricing", "FAQ"];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const activeSection = useActiveSection();
 
   const { scrollY } = useScroll();
 
@@ -19,6 +22,8 @@ export default function Navbar() {
     document.getElementById(id.toLowerCase().replace(/\s/g, ""))?.scrollIntoView({ behavior: "smooth" });
     setOpen(false);
   };
+
+  const getLinkId = (label: string) => label.toLowerCase().replace(/\s/g, "");
 
   return (
     <motion.nav
@@ -41,33 +46,67 @@ export default function Navbar() {
           Awake
         </motion.a>
 
-        <div className="hidden md:flex items-center gap-1 bg-muted rounded-full px-2 py-1">
-          {links.map((l, i) => (
-            <motion.button
-              key={l}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 + i * 0.05 }}
-              onClick={() => scrollTo(l)}
-              className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground rounded-full hover:bg-background transition-colors"
-            >
-              {l}
-            </motion.button>
-          ))}
+        <div className="hidden md:flex items-center gap-1 bg-muted/60 rounded-full px-1.5 py-1 relative">
+          {links.map((l, i) => {
+            const isActive = activeSection === getLinkId(l);
+            return (
+              <motion.button
+                key={l}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.05 }}
+                onClick={() => scrollTo(l)}
+                className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors z-10 ${
+                  isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {/* Liquid glass active indicator */}
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNavPill"
+                    className="absolute inset-0 rounded-full bg-background/80 dark:bg-background/60 backdrop-blur-md shadow-[0_0_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] dark:shadow-[0_0_12px_rgba(255,255,255,0.06),inset_0_1px_0_rgba(255,255,255,0.1)] border border-border/50"
+                    transition={{
+                      type: "spring",
+                      stiffness: 350,
+                      damping: 30,
+                    }}
+                  />
+                )}
+                <span className="relative z-10">{l}</span>
+              </motion.button>
+            );
+          })}
         </div>
 
-        <motion.button
-          onClick={() => scrollTo("contact")}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-          className="hidden md:flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold transition-opacity"
-        >
-          Let's Collaborate <ArrowRight className="w-4 h-4" />
-        </motion.button>
+        <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
+          <motion.button
+            onClick={() => scrollTo("contact")}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="group relative flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold overflow-hidden"
+          >
+            {/* Shimmer sweep on hover */}
+            <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+            <span className="relative z-10 flex items-center gap-2">
+              Let's Collaborate
+              <motion.span
+                className="inline-block"
+                animate={{ x: [0, 4, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+              >
+                <ArrowRight className="w-4 h-4" />
+              </motion.span>
+            </span>
+          </motion.button>
+        </div>
 
-        <button onClick={() => setOpen(!open)} className="md:hidden text-foreground">
-          {open ? <X /> : <Menu />}
-        </button>
+        <div className="flex md:hidden items-center gap-2">
+          <ThemeToggle />
+          <button onClick={() => setOpen(!open)} className="text-foreground">
+            {open ? <X /> : <Menu />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -80,18 +119,25 @@ export default function Navbar() {
             className="md:hidden overflow-hidden bg-background border-t border-border"
           >
             <div className="flex flex-col p-4 gap-2">
-              {links.map((l, i) => (
-                <motion.button
-                  key={l}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  onClick={() => scrollTo(l)}
-                  className="text-left px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
-                >
-                  {l}
-                </motion.button>
-              ))}
+              {links.map((l, i) => {
+                const isActive = activeSection === getLinkId(l);
+                return (
+                  <motion.button
+                    key={l}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    onClick={() => scrollTo(l)}
+                    className={`text-left px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
+                      isActive
+                        ? "text-foreground bg-muted/80 backdrop-blur-sm"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    }`}
+                  >
+                    {l}
+                  </motion.button>
+                );
+              })}
               <motion.button
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
