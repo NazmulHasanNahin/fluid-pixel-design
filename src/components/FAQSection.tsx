@@ -43,9 +43,10 @@ export default function FAQSection() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={isVisible ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.25 + i * 0.08 }}
+                whileHover={{ scale: 1.02, x: 4 }}
               >
-                <AccordionItem value={`item-${i}`} className="border border-border rounded-xl px-6 bg-card">
-                  <AccordionTrigger className="text-left text-foreground hover:no-underline">{f.q}</AccordionTrigger>
+                <AccordionItem value={`item-${i}`} className="border border-border rounded-xl px-6 bg-card transition-shadow duration-300 hover:shadow-md hover:border-accent/40">
+                  <AccordionTrigger className="text-left text-foreground hover:no-underline transition-colors duration-200">{f.q}</AccordionTrigger>
                   <AccordionContent className="text-muted-foreground">{f.a}</AccordionContent>
                 </AccordionItem>
               </motion.div>
