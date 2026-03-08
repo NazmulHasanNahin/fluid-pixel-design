@@ -6,7 +6,7 @@ import ServicesSection from "@/components/ServicesSection";
 import CTABanner from "@/components/CTABanner";
 import PortfolioSection from "@/components/PortfolioSection";
 import TeamSection from "@/components/TeamSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
+
 import PricingSection from "@/components/PricingSection";
 import FAQSection from "@/components/FAQSection";
 import FinalCTA from "@/components/FinalCTA";
