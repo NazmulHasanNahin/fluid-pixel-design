@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, type Easing } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Palette, RefreshCw, Code, Package, Zap, TrendingUp } from "lucide-react";
 import BlurTypeText from "@/components/BlurTypeText";
