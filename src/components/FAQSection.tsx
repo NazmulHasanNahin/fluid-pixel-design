@@ -8,12 +8,10 @@ import {
 } from "@/components/ui/accordion";
 
 const faqs = [
-  { q: "What services does DEVZeroOne offer?", a: "We provide end-to-end Shopify solutions including store design, store redesign, custom development, dropshipping setup, store optimization, and growth strategy for DTC brands." },
-  { q: "How long does a typical Shopify store take to build?", a: "Depending on the package, our Basic plan delivers in 7 days, Standard in 10 days, and Premium in 14 days." },
-  { q: "Do you work with new brands that don't have products yet?", a: "Absolutely! We offer winning product research and complete dropshipping setup to help you start from scratch." },
-  { q: "What's your revision policy?", a: "All our plans include unlimited revisions to ensure you're completely satisfied with the final result." },
-  { q: "Can I upgrade my plan later?", a: "Yes, you can upgrade at any time. We'll seamlessly transition your project to the new plan with no disruption." },
-  { q: "Do you provide ongoing support after delivery?", a: "Yes, we provide post-launch support to ensure everything runs smoothly and help you with any questions or updates needed." },
+  { q: "What do I need to provide to get started?", a: "Just share your store access with your store link and collaborator code. We will send a request, and you only need to accept it." },
+  { q: "Do you provide support after delivery completion?", a: "Yes! We provide 30 days of ongoing support after delivery because we believe in building a long-term relationship with our clients." },
+  { q: "Can I manage the store myself after delivery?", a: "Absolutely! We even provide a dedicated recorded video tutorial showing exactly how you can manage your store, so there's no need to worry." },
+  { q: "Why should I choose DEVZeroOne instead of others?", a: "We are not an ordinary service provider. We want to be your growth partner. DEVZeroOne treats your business as if it were our own, focusing on real results and long-term growth." },
 ];
 
 export default function FAQSection() {

@@ -30,14 +30,8 @@ export default function HeroSection() {
     <section
       id="home"
       ref={sectionRef}
-      className="relative w-full pt-44 2xl:pb-20 pb-10 px-6 overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, hsl(210 80% 92%) 0%, hsl(0 0% 100%) 50%, hsl(20 80% 92%) 100%)",
-      }}
+      className="relative w-full pt-48 2xl:pb-20 pb-10 px-6 overflow-hidden hero-gradient"
     >
-      <div className="absolute inset-0 -z-10 hidden dark:block" style={{
-        background: "linear-gradient(135deg, hsl(210 20% 12%) 0%, hsl(0 0% 5%) 50%, hsl(20 15% 12%) 100%)",
-      }} />
       <motion.div
         style={{ y: yParallax, opacity: opacityParallax }}
         className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
