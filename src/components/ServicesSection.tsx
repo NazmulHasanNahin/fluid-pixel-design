@@ -8,80 +8,80 @@ const services = [
   {
     icon: Palette,
     label: "Shopify Store Design",
-    tag: "DESIGN",
     desc: "Beautiful, conversion-focused store designs that capture your brand and drive sales.",
     features: [
       "Custom theme design tailored to your brand",
       "Mobile-first responsive layouts",
       "Conversion-optimized product pages",
     ],
-    techs: ["Shopify", "Liquid", "CSS", "Figma"],
+    tags: ["Shopify Store Design", "Brand Identity"],
     img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+    accent: "bg-[hsl(var(--green-light))]",
   },
   {
     icon: RefreshCw,
     label: "Store Redesign",
-    tag: "REDESIGN",
     desc: "Transform your existing store with modern aesthetics and improved user experience.",
     features: [
       "Full UX audit & improvement plan",
       "Modern design system implementation",
       "Performance & speed optimization",
     ],
-    techs: ["Shopify", "UX/UI", "Analytics", "A/B Testing"],
+    tags: ["Visual Story Telling", "Web & Mobile Design"],
     img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
+    accent: "bg-[hsl(var(--purple-light))]",
   },
   {
     icon: Code,
     label: "Custom Development",
-    tag: "DEVELOPMENT",
     desc: "Tailored Shopify solutions with custom themes, apps, and integrations.",
     features: [
       "Custom Shopify app development",
       "Third-party API integrations",
       "Advanced Liquid theme customization",
     ],
-    techs: ["React", "Node.js", "Shopify API", "GraphQL"],
+    tags: ["UX Research", "Interface Design"],
     img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+    accent: "bg-[hsl(var(--blue-light))]",
   },
   {
     icon: Package,
     label: "Dropshipping Setup",
-    tag: "DROPSHIPPING",
     desc: "Complete dropshipping store setup with supplier integration and automation.",
     features: [
       "Supplier sourcing & integration",
       "Automated order fulfillment",
       "Inventory sync & management",
     ],
-    techs: ["Shopify", "DSers", "Oberlo", "Automation"],
+    tags: ["Product Design", "Interaction Design"],
     img: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=800&h=600&fit=crop",
+    accent: "bg-[hsl(var(--peach-light))]",
   },
   {
     icon: Zap,
     label: "Store Optimization",
-    tag: "OPTIMIZATION",
     desc: "Speed optimization, SEO, and conversion rate improvements for better performance.",
     features: [
       "Core Web Vitals optimization",
       "SEO strategy & implementation",
       "Conversion rate optimization",
     ],
-    techs: ["PageSpeed", "SEO", "CRO", "Analytics"],
+    tags: ["Performance", "SEO & CRO"],
     img: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=600&fit=crop",
+    accent: "bg-[hsl(var(--yellow-light))]",
   },
   {
     icon: TrendingUp,
     label: "Growth Strategy",
-    tag: "STRATEGY",
     desc: "Data-driven strategies to scale your e-commerce business and increase revenue.",
     features: [
       "Market analysis & positioning",
       "Growth roadmap development",
       "Revenue scaling strategies",
     ],
-    techs: ["Analytics", "Strategy", "Marketing", "Data"],
+    tags: ["Analytics", "Growth Marketing"],
     img: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop",
+    accent: "bg-[hsl(var(--pink-light))]",
   },
 ];
 
@@ -91,100 +91,75 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
     target: cardRef,
     offset: ["start end", "end start"],
   });
-  const imgY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
+  const imgY = useTransform(scrollYProgress, [0, 1], [-15, 15]);
+  const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1, 1.05]);
 
   return (
     <motion.div
       ref={cardRef}
-      initial={{ opacity: 0, y: 60 }}
+      initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-      className="sticky top-24 mb-8"
-      style={{ zIndex: index + 1 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.7, delay: index * 0.08, ease: "easeOut" }}
+      className="group cursor-pointer"
     >
-      <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-lg">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-          {/* Left: Content */}
-          <div className="p-8 md:p-12 flex flex-col justify-center">
-            <motion.span
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-xs font-bold tracking-widest text-accent uppercase mb-4"
-            >
-              {service.tag}
-            </motion.span>
+      {/* Image container with accent corners */}
+      <div className="relative rounded-2xl overflow-hidden bg-muted aspect-[4/3]">
+        <div
+          className={`absolute top-0 left-0 w-24 h-16 ${service.accent} rounded-br-[2rem] z-10 opacity-80`}
+        />
+        <div
+          className={`absolute top-0 right-0 w-16 h-10 ${service.accent} rounded-bl-[2rem] z-10 opacity-50`}
+        />
 
-            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4 font-serif-display">
-              {service.label}
-            </h3>
+        <motion.img
+          src={service.img}
+          alt={service.label}
+          className="w-full h-full object-cover"
+          loading="lazy"
+          style={{ y: imgY, scale: imgScale }}
+        />
 
-            <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-6">
-              {service.desc}
-            </p>
-
-            <div className="border-t border-border pt-6 mb-6">
-              <div className="space-y-3">
-                {service.features.map((feat, i) => (
-                  <motion.div
-                    key={feat}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + i * 0.08 }}
-                    className="flex items-center gap-3"
-                  >
-                    <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
-                    <span className="text-sm text-muted-foreground">{feat}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-2 mb-8">
-              {service.techs.map((tech) => (
-                <span
-                  key={tech}
-                  className="text-xs px-3 py-1 rounded-full border border-accent/40 text-accent font-medium"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-
-            <div className="flex gap-3">
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-6 py-3 rounded-full text-sm font-semibold"
-              >
-                Get Started <ArrowUpRight className="w-4 h-4" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 rounded-full text-sm font-semibold hover:bg-muted transition-colors"
-              >
-                Learn More <ArrowUpRight className="w-4 h-4" />
-              </motion.button>
-            </div>
-          </div>
-
-          {/* Right: Image preview */}
-          <div className="relative overflow-hidden bg-muted min-h-[300px] lg:min-h-[unset]">
-            <motion.img
-              src={service.img}
-              alt={service.label}
-              className="w-full h-full object-cover absolute inset-0"
-              style={{ y: imgY }}
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-card/60 via-transparent to-transparent lg:bg-gradient-to-l lg:from-card/30 lg:via-transparent lg:to-transparent" />
-          </div>
-        </div>
+        {/* Hover overlay */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileHover={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="absolute inset-0 bg-foreground/10 backdrop-blur-[2px] flex items-center justify-center z-20"
+        >
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileHover={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="w-14 h-14 rounded-full bg-background/90 flex items-center justify-center shadow-lg"
+          >
+            <ArrowUpRight className="w-5 h-5 text-foreground" />
+          </motion.div>
+        </motion.div>
       </div>
+
+      {/* Title & Tags */}
+      <motion.div
+        className="mt-5 px-1"
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.15 + index * 0.08 }}
+      >
+        <h3 className="text-xl font-semibold text-foreground group-hover:text-accent transition-colors duration-300">
+          {service.label}
+        </h3>
+        <div className="flex gap-2 mt-3 flex-wrap">
+          {service.tags.map((tag) => (
+            <span
+              key={tag}
+              className="text-xs px-4 py-1.5 rounded-full border border-border text-muted-foreground bg-background hover:border-accent/50 hover:text-foreground transition-colors duration-200"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
@@ -218,7 +193,7 @@ export default function ServicesSection() {
           />
         </div>
 
-        <div className="relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-14">
           {services.map((service, i) => (
             <ServiceCard key={service.label} service={service} index={i} />
           ))}
