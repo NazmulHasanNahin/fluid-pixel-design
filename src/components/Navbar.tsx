@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Code, ArrowRight, Menu, X } from "lucide-react";
 import { motion, AnimatePresence, useScroll } from "framer-motion";
-import ThemeToggle from "@/components/ThemeToggle";
 import { useActiveSection } from "@/hooks/useActiveSection";
 
 const links = ["Home", "Services", "Portfolio", "Pricing", "About", "FAQ"];
@@ -70,7 +69,7 @@ export default function Navbar() {
                 {isActive && (
                   <motion.div
                     layoutId="activeNavPill"
-                    className="absolute inset-0 rounded-full bg-background/80 dark:bg-background/60 backdrop-blur-md shadow-[0_0_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] dark:shadow-[0_0_12px_rgba(255,255,255,0.06),inset_0_1px_0_rgba(255,255,255,0.1)] border border-border/50"
+                    className="absolute inset-0 rounded-full bg-background/80 backdrop-blur-md shadow-[0_0_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5)] border border-border/50"
                     transition={{
                       type: "spring",
                       stiffness: 350,
@@ -86,7 +85,6 @@ export default function Navbar() {
 
         {/* Right side */}
         <div className="hidden md:flex items-center gap-3">
-          <ThemeToggle />
           <motion.a
             href="https://calendly.com/devzeroone"
             target="_blank"
@@ -111,7 +109,6 @@ export default function Navbar() {
 
         {/* Mobile */}
         <div className="flex md:hidden items-center gap-2">
-          <ThemeToggle />
           <button onClick={() => setOpen(!open)} className="text-foreground">
             {open ? <X /> : <Menu />}
           </button>

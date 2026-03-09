@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import BlurTypeText from "@/components/BlurTypeText";
 
 const faqs = [
   { q: "What do I need to provide to get started?", a: "Just share your store access with your store link and collaborator code. We will send a request, and you only need to accept it." },
@@ -20,15 +21,22 @@ export default function FAQSection() {
   return (
     <section id="faq" ref={ref} className="py-24 px-6 bg-muted/30">
       <div className="max-w-3xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-3xl md:text-5xl font-bold text-center text-foreground"
-        >
-          Got questions? We've got{" "}
-          <span className="font-serif-display italic font-normal">answers</span>
-        </motion.h2>
+        <div className="text-center">
+          <BlurTypeText
+            text="FAQ"
+            isVisible={isVisible}
+            className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3"
+          />
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="text-3xl md:text-5xl font-bold text-foreground"
+          >
+            Got questions? We've got{" "}
+            <span className="font-serif-display italic font-normal">answers</span>
+          </motion.h2>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
