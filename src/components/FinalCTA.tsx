@@ -64,13 +64,16 @@ export default function FinalCTA() {
             >
               <h3 className="font-semibold text-foreground text-sm">Book a Free 30-Minute Consultation</h3>
               <p className="text-xs text-muted-foreground mt-2">Get expert guidance and a custom strategy for your store.</p>
-              <motion.button
+              <motion.a
+                href="https://calendly.com/devzeroone"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.06, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.2)" }}
                 whileTap={{ scale: 0.97 }}
                 className="mt-4 inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-semibold transition-colors"
               >
                 Book A Free Call <ArrowRight className="w-4 h-4" />
-              </motion.button>
+              </motion.a>
             </motion.div>
           </div>
 

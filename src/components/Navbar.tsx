@@ -148,15 +148,17 @@ export default function Navbar() {
                   </motion.button>
                 );
               })}
-              <motion.button
+              <motion.a
+                href="https://calendly.com/devzeroone"
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                onClick={() => scrollTo("contact")}
                 className="mt-2 flex items-center justify-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-full text-sm font-semibold"
               >
                 Book A Free Call <ArrowRight className="w-4 h-4" />
-              </motion.button>
+              </motion.a>
             </div>
           </motion.div>
         )}

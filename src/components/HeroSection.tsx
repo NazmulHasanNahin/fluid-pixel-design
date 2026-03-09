@@ -89,13 +89,16 @@ export default function HeroSection() {
             }}
             className="mt-8 flex flex-wrap items-center gap-4"
           >
-            <motion.button
+            <motion.a
+              href="https://calendly.com/devzeroone"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.3)" }}
               whileTap={{ scale: 0.97 }}
               className="flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-sm font-semibold transition-colors"
             >
               Book A Free Call <ArrowRight className="w-4 h-4" />
-            </motion.button>
+            </motion.a>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}

@@ -65,7 +65,7 @@ export default function Footer() {
             <li>contact@devzeroone.com</li>
             <li>Worldwide Remote</li>
             <li>
-              <a href="#contact" className="text-foreground font-medium hover:underline">Book A Free Call</a>
+              <a href="https://calendly.com/devzeroone" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium hover:underline">Book A Free Call</a>
             </li>
           </ul>
         </div>
