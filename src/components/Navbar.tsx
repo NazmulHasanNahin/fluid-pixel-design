@@ -87,8 +87,10 @@ export default function Navbar() {
         {/* Right side */}
         <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
-          <motion.button
-            onClick={() => scrollTo("contact")}
+          <motion.a
+            href="https://calendly.com/devzeroone"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="group relative flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold overflow-hidden"
@@ -104,7 +106,7 @@ export default function Navbar() {
                 <ArrowRight className="w-4 h-4" />
               </motion.span>
             </span>
-          </motion.button>
+          </motion.a>
         </div>
 
         {/* Mobile */}
