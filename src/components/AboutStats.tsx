@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Heart, Handshake, ThumbsUp, TrendingUp, BarChart3, Brain } from "lucide-react";
+import BlurTypeText from "@/components/BlurTypeText";
 
 const values = [
   { icon: Heart, title: "Treats your business like our own", desc: "We work with full ownership and responsibility, focusing on what truly benefits your business growth and long-term success.", bg: "bg-[hsl(var(--purple-light))]" },
@@ -17,18 +18,22 @@ export default function AboutStats() {
   return (
     <section id="about" ref={ref} className="py-24 px-6">
       <div className="max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center"
-        >
-          <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">The Difference</p>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground">
+        <div className="text-center">
+          <BlurTypeText
+            text="The Difference"
+            isVisible={isVisible}
+            className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3"
+          />
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="text-3xl md:text-5xl font-bold text-foreground"
+          >
             Why Choose{" "}
             <span className="font-serif-display italic font-normal">DEVZeroOne</span>
-          </h2>
-        </motion.div>
+          </motion.h2>
+        </div>
 
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {values.map((v, i) => (

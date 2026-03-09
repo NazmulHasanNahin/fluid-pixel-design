@@ -22,9 +22,14 @@ export default function LogoMarquee() {
           <div className="flex overflow-hidden">
             <div className="animate-marquee flex items-center gap-16 whitespace-nowrap">
               {[...logos, ...logos, ...logos].map((name, i) => (
-                <span key={i} className="text-2xl font-bold text-muted-foreground/30 select-none tracking-wide">
+                <motion.span
+                  key={i}
+                  whileHover={{ scale: 1.15, color: "hsl(var(--foreground))" }}
+                  transition={{ duration: 0.2 }}
+                  className="text-2xl font-bold text-muted-foreground/30 select-none tracking-wide cursor-pointer transition-colors duration-200 hover:text-muted-foreground/70"
+                >
                   {name}
-                </span>
+                </motion.span>
               ))}
             </div>
           </div>

@@ -75,13 +75,9 @@ export default function Footer() {
         initial={{ opacity: 0 }}
         animate={isVisible ? { opacity: 1 } : {}}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="max-w-6xl mx-auto mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between text-sm text-muted-foreground gap-4"
+        className="max-w-6xl mx-auto mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground"
       >
         <span>© {new Date().getFullYear()} DEVZeroOne. All rights reserved.</span>
-        <div className="flex gap-4">
-          <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-foreground transition-colors">Terms of Service</a>
-        </div>
       </motion.div>
     </footer>
   );
