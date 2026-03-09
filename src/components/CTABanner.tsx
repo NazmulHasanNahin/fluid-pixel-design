@@ -49,13 +49,16 @@ export default function CTABanner() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex flex-col sm:flex-row gap-3 relative z-10"
         >
-          <motion.button
+          <motion.a
+            href="https://calendly.com/devzeroone"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             className="flex items-center gap-2 bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))] px-6 py-3 rounded-full text-sm font-semibold transition-colors"
           >
             Book A Free Call <ArrowRight className="w-4 h-4" />
-          </motion.button>
+          </motion.a>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
